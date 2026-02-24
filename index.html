@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Rohma ❤️</title>
+<style>
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    margin:0;
+    padding:0;
+}
+body {
+    height:100vh;
+    background: linear-gradient(120deg,#ff758c,#ff7eb3,#ffd3e0,#ffc3a0);
+    background-size:400% 400%;
+    animation:bg 12s ease infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+@keyframes bg {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+.screen {
+    position:absolute;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transform:scale(0.9);
+    transition:all 1s ease;
+    pointer-events:none;
+}
+.screen.active {
+    opacity:1;
+    transform:scale(1);
+    pointer-events:auto;
+}
+.card {
+    background: rgba(255,255,255,0.95);
+    padding: 35px 30px;
+    border-radius:25px;
+    text-align:center;
+    max-width:430px;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+    animation:pop 1s ease;
+}
+@keyframes pop {
+    from { transform:scale(.7); opacity:0 }
+    to { transform:scale(1); opacity:1 }
+}
+h1 {
+    color:#ff3f6c;
+    margin-bottom:10px;
+    animation:glow 2s infinite alternate;
+}
+@keyframes glow {
+    from{text-shadow:0 0 5px #ff9eb3}
+    to{text-shadow:0 0 15px #ff3f6c}
+}
+p {
+    font-size:18px;
+    color:#444;
+    line-height:1.6;
+    min-height:120px;
+}
+button {
+    border:none;
+    padding:12px 26px;
+    border-radius:30px;
+    background:linear-gradient(135deg,#ff5f9e,#ff3f6c);
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:15px;
+    transition:.3s;
+}
+button:hover { transform:scale(1.1) }
+.heart {
+    font-size:55px;
+    animation:beat 1s infinite;
+}
+@keyframes beat {
+    0%,100% { transform:scale(1) }
+    50% { transform:scale(1.3) }
+}
+
+/* Envelope */
+.envelope {
+    width:260px;
+    height:170px;
+    position: relative;
+    perspective: 1000px;
+    cursor: pointer;
+    margin: 20px auto;
+}
+.envelope-body {
+    width: 100%;
+    height: 100%;
+    background: #ff5f9e;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+}
+.envelope-flap {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ff3f6c;
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
+    transform-origin: top;
+    transition: transform 0.6s ease;
+}
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+.envelope.open .envelope-body {
+    transform: translateY(-40px);
+}
+.letter {
+    position: absolute;
+    width: 90%;
+    height: 120%;
+    background: white;
+    top: 100%;
+    left: 5%;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    opacity: 0;
+    transition: top 0.8s ease, opacity 0.8s ease;
+}
+.envelope.open .letter {
+    top: 10%;
+    opacity: 1;
+}
+
+/* Floating hearts */
+.floating {
+    position:absolute;
+    bottom:-50px;
+    font-size:26px;
+    animation:floatUp 8s linear infinite;
+    opacity:.8;
+}
+@keyframes floatUp {
+    0% { transform:translateY(0); opacity:0 }
+    10% { opacity:1 }
+    100% { transform:translateY(-110vh); opacity:0 }
+}
+
+/* Name floating */
+.name {
+    position:absolute;
+    font-size:22px;
+    color:rgba(255,255,255,0.7);
+    animation:floatUp 10s linear infinite;
+}
+
+/* Confetti */
+.confetti-piece {
+    position:fixed;
+    width:10px;
+    height:10px;
+    background-color: #ff3f6c;
+    opacity:0.9;
+    z-index:9999;
+    pointer-events:none;
+    animation:confetti-fall linear forwards;
+}
+@keyframes confetti-fall {
+    0% { transform:translateY(0) rotate(0deg); opacity:1; }
+    100% { transform:translateY(100vh) rotate(720deg); opacity:0; }
+}
+
+/* Slideshow */
+.slideshow {
+    width:260px;
+    height:260px;
+    border-radius:20px;
+    overflow:hidden;
+    margin:10px auto;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    position:relative;
+}
+.slideshow img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    position:absolute;
+    top:0; left:0;
+    opacity:0;
+    transform: scale(1.05);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+.slideshow img.active { 
+    opacity:1; 
+    transform: scale(1);
+}
+
+/* Screen 4: Story animation */
+#s4 .card {
+    background: linear-gradient(135deg,#fff0f5,#ffe4e1,#fffacd,#ffe4e1);
+    background-size: 400% 400%;
+    animation: cardBg 8s ease infinite;
+    overflow: hidden;
+}
+@keyframes cardBg {
+    0% {background-position:0% 50%}
+    50% {background-position:100% 50%}
+    100% {background-position:0% 50%}
+}
+#s4 p span {
+    opacity:0;
+    display:block;
+    transform: translateY(15px);
+    animation: fadeLine 0.5s forwards;
+}
+@keyframes fadeLine {
+    to {opacity:1; transform:translateY(0);}
+}
+
+/* Screen 5: Forever Promise */
+#s5 .card {
+    animation: pulseCard 1.5s infinite;
+    position:relative;
+}
+@keyframes pulseCard {
+    0%,100% { transform: scale(1); box-shadow:0 15px 40px rgba(255,63,108,0.5);}
+    50% { transform: scale(1.03); box-shadow:0 20px 50px rgba(255,63,108,0.8);}
+}
+#s5 .floating-heart {
+    position:absolute;
+    font-size:26px;
+    animation:floatUpForever linear infinite;
+    opacity:0.8;
+}
+@keyframes floatUpForever {
+    0% { transform:translateY(0) scale(0.8); opacity:0 }
+    10% { opacity:1 }
+    100% { transform:translateY(-120vh) scale(1.2); opacity:0 }
+}
+</style>
+</head>
+<body>
+
+<audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/03/30/audio_8b1bb8d10f.mp3?filename=romantic-ambient-piano-144998.mp3">
+</audio>
+
+<!-- Screen 1 -->
+<div class="screen active" id="s1">
+    <div class="card">
+        <div class="heart">❤️</div>
+        <h1>I'm Sorry Rohma</h1>
+        <p id="t1"></p>
+        <button onclick="next(2)">Next 💕</button>
+    </div>
+</div>
+
+<!-- Screen 2 -->
+<div class="screen" id="s2">
+    <div class="card">
+        <h1>Open This 💌</h1>
+        <div class="envelope" onclick="openLetter(this)">
+            <div class="envelope-body">
+                <div class="envelope-flap"></div>
+            </div>
+            <div class="letter" id="t2"></div>
+        </div>
+        <button onclick="next(3)">Next 🌸</button>
+    </div>
+</div>
+
+<!-- Screen 3: Slideshow -->
+<div class="screen" id="s3">
+    <div class="card">
+        <div class="heart">💖</div>
+        <h1>Our Memories</h1>
+        <div class="slideshow">
+            <img src="photo1.jpeg" class="active">
+            <img src="photo2.jpeg">
+            <img src="photo3.jpeg">
+            <img src="photo4.jpeg">
+        </div>
+        <p id="t3">Remember all the fun moments together 💕</p>
+        <button onclick="next(4)">Next 🐾</button>
+    </div>
+</div>
+
+<!-- Screen 4: Story text -->
+<div class="screen" id="s4">
+    <div class="card">
+        <h1>Our Story 📖</h1>
+        <p id="t4"></p>
+        <button onclick="next(5)">Next 💍</button>
+    </div>
+</div>
+
+<!-- Screen 5: Final Promise -->
+<div class="screen" id="s5">
+    <div class="card">
+        <div class="heart">💗</div>
+        <h1>Forever Promise</h1>
+        <p id="t5"></p>
+        <div style="font-size:30px;">🐻‍❄️💗🐻</div>
+    </div>
+</div>
+
+<script>
+// Messages
+const m1="Rohma, I never meant to hurt you.\nSeeing you sad breaks my heart.\n\nPlease forgive me 🥺\nYou mean everything to me.";
+const m2="I love you more than words can explain.\nYou are my happiness, my peace, my comfort.\n\nYou are my safe place 💕";
+const m3="Our journey together is full of love, laughter, and little adventures.\nEach moment with you is precious ❤️";
+const m4="My love for you will NEVER change.\nWe fight, we fix, we stay.\nWe grow, we learn, we love.\n\nForever means YOU & ME 💍\nI am never letting you go ❤️";
+
+// Typing effect
+function type(id,msg,speed=40){
+    let i=0,el=document.getElementById(id);
+    el.innerHTML="";
+    const t=setInterval(()=>{
+        if(i<msg.length){
+            el.innerHTML+=msg[i]==="\n"? "<br>": msg[i];
+            i++;
+        } else clearInterval(t);
+    },speed);
+}
+function typeLines(id,msg){
+    const el = document.getElementById(id);
+    el.innerHTML = "";
+    const lines = msg.split("\n");
+    lines.forEach((line, idx) => {
+        const span = document.createElement("span");
+        span.textContent = line;
+        span.style.animationDelay = (idx*0.5)+"s";
+        el.appendChild(span);
+    });
+}
+type("t1",m1);
+
+// Navigation
+function next(n){
+    document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+    document.getElementById("s"+n).classList.add("active");
+    if(n==4) typeLines("t4",m3);
+    if(n==5) type("t5",m4,35);
+}
+
+// Envelope
+function openLetter(el){
+    if(!el.classList.contains("open")){
+        el.classList.add("open");
+        type("t2", m2, 35);
+        spawnConfetti(30);
+    }
+}
+
+// Floating hearts
+const icons=["❤️","💗","💕","💖","🐻"];
+setInterval(()=>{
+    const el=document.createElement("div");
+    el.className="floating";
+    el.innerText=icons[Math.floor(Math.random()*icons.length)];
+    el.style.left=Math.random()*100+"vw";
+    el.style.animationDuration=(6+Math.random()*6)+"s";
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),12000);
+},300);
+
+// Name floating
+setInterval(()=>{
+    const n=document.createElement("div");
+    n.className="name";
+    n.innerText="Rohma ❤️";
+    n.style.left=Math.random()*100+"vw";
+    n.style.animationDuration=(8+Math.random()*6)+"s";
+    document.body.appendChild(n);
+    setTimeout(()=>n.remove(),12000);
+},700);
+
+// Confetti
+function spawnConfetti(count){
+    for(let i=0;i<count;i++){
+        const c=document.createElement("div");
+        c.className="confetti-piece";
+        c.style.left=Math.random()*100+"vw";
+        c.style.backgroundColor=`hsl(${Math.random()*360},80%,60%)`;
+        c.style.width=(5+Math.random()*8)+"px";
+        c.style.height=c.style.width;
+        c.style.animationDuration=(2+Math.random()*2)+"s";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),4000);
+    }
+}
+
+// Slideshow
+const slides=document.querySelectorAll(".slideshow img");
+let slideIndex=0;
+setInterval(()=>{
+    slides.forEach(s=>s.classList.remove("active"));
+    slideIndex=(slideIndex+1)%slides.length;
+    slides[slideIndex].classList.add("active");
+},2500);
+
+// Floating hearts on screen 5
+function spawnHearts(count){
+    const container = document.getElementById("s5");
+    for(let i=0;i<count;i++){
+        const h=document.createElement("div");
+        h.className="floating-heart";
+        h.innerText=["❤️","💖","💗"][Math.floor(Math.random()*3)];
+        h.style.left=Math.random()*90+"%";
+        h.style.animationDuration=(5+Math.random()*5)+"s";
+        container.appendChild(h);
+        setTimeout(()=>h.remove(),12000);
+    }
+}
+setInterval(()=>{
+    if(document.getElementById("s5").classList.contains("active")){
+        spawnHearts(3);
+    }
+},800);
+</script>
+</body>
+</html>
